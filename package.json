@@ -1,0 +1,33 @@
+{
+  "name": "mytwitter",
+  "version": "1.0.0",
+  "description": "clone coding of twitter - simple version",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tree698/MyTwitter-server.git"
+  },
+  "keywords": [
+    "node.js",
+    "express"
+  ],
+  "author": "Chanwoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tree698/MyTwitter-server/issues"
+  },
+  "homepage": "https://github.com/tree698/MyTwitter-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^5.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.18"
+  }
+}
