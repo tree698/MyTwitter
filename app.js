@@ -27,5 +27,5 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-db.getConnection().then(console.log);
+db.getConnection();
 app.listen(config.host.port);
