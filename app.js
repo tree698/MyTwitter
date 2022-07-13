@@ -6,7 +6,7 @@ import 'express-async-errors';
 import tweetsRouter from './router/tweet_router.js';
 import authRouter from './router/auth_router.js';
 import { config } from './config.js';
-import { db, sequelize } from './db/database.js';
+import { sequelize } from './db/database.js';
 
 const app = express();
 
@@ -27,7 +27,6 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-sequelize.sync().then((client) => {
-  db.getConnection();
+sequelize.sync().then(() => {
   app.listen(config.host.port);
 });
