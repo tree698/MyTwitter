@@ -1,27 +1,29 @@
-// abcd1234: $2b$12$G9xf8SFq3oTEgdj7ozHQ/uhDOyeQcUEDU8tnOcvpvApuadr3nE5Vm
-
-let users = [
-  {
-    id: '1',
-    username: 'bob',
-    password: '$2b$12$G9xf8SFq3oTEgdj7ozHQ/uhDOyeQcUEDU8tnOcvpvApuadr3nE5Vm',
-    name: 'Bob',
-    email: 'bob@gmail.com',
-    url:
-      'https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-1.png',
-  },
-];
+import { getUsers } from '../db/database.js';
+import MongoDB from 'mongodb';
 
 export async function findByUsername(username) {
-  return users.find((user) => user.username === username);
+  return getUsers() //
+    .findOne({ username })
+    .then(mapOptionalUser);
 }
 
+const ObjectId = MongoDB.ObjectId;
+
 export async function findById(id) {
-  return users.find((user) => user.id === id);
+  return getUsers() //
+    .findOne({ _id: new ObjectId(id) })
+    .then(mapOptionalUser);
 }
 
 export async function createUser(user) {
-  const created = { ...user, id: Date.now().toString() };
-  users.push(created);
-  return created.id;
+  return getUsers() //
+    .insertOne(user)
+    .then((data) => {
+      // console.log(data.insertedId.toString());
+      return data.insertedId.toString();
+    });
+}
+
+function mapOptionalUser(data) {
+  return data ? { ...data, id: data._id } : data;
 }
