@@ -1,23 +1,14 @@
-import MongoDB from 'mongodb';
-// import { MongoClient } from 'mongodb';
+import Mongoose from 'mongoose';
 import { config } from '../config.js';
 
-let db;
 export async function connectDB() {
-  return MongoDB.MongoClient.connect(config.db.host) //
-    .then((client) => (db = client.db()));
+  return Mongoose.connect(config.db.host);
 }
 
-// export async function connectDB() {
-//   const client = new MongoClient(config.db.host);
-//   db = client.db();
-//   return db;
-// }
-
-export function getUsers() {
-  return db.collection('users');
-}
-
-export function getTweets() {
-  return db.collection('tweets');
+export function useVirtualId(schema) {
+  schema.virtual('id').get(function () {
+    return this._id.toString();
+  });
+  schema.set('toJSON', { virtuals: true });
+  schema.set('toOject', { virtuals: true });
 }
