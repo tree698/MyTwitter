@@ -6,6 +6,7 @@ import 'express-async-errors';
 import tweetsRouter from './router/tweet_router.js';
 import authRouter from './router/auth_router.js';
 import { config } from './config.js';
+import { initSocket } from './connection/socket.js';
 import { sequelize } from './db/database.js';
 
 const app = express();
